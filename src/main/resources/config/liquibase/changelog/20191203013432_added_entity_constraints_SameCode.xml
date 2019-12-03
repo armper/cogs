@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity SameCode.
+    -->
+    <changeSet id="20191203013432-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="cog_broadcast_rights_id"
+                                 baseTableName="same_code"
+                                 constraintName="fk_same_code_cog_broadcast_rights_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cog_broadcast_rights"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sameCode">
+            <h2><span>Same Code</span> {{sameCode.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Same Code</span></dt>
+                <dd>
+                    <span>{{sameCode.sameCode}}</span>
+                </dd>
+                <dt><span>Cog Broadcast Rights</span></dt>
+                <dd>
+                    <div *ngIf="sameCode.cogBroadcastRights">
+                        <a [routerLink]="['/cog-broadcast-rights', sameCode.cogBroadcastRights?.id, 'view']">{{sameCode.cogBroadcastRights?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/same-code', sameCode.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
