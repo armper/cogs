@@ -1,0 +1,27 @@
+{
+    "name": "CogBroadcastRights",
+    "fields": [
+        {
+            "fieldName": "cogId",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "sameCode",
+            "otherEntityRelationshipName": "cogBroadcastRights",
+            "relationshipName": "sameCode"
+        }
+    ],
+    "changelogDate": "20191203013431",
+    "entityTableName": "cog_broadcast_rights",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,61 @@
+<div>
+    <h2 id="page-heading">
+        <span>Same Codes</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-same-code" [routerLink]="['/same-code/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Same Code
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="sameCodes?.length === 0">
+        <span>No sameCodes found</span>
+    </div>
+    <div class="table-responsive" *ngIf="sameCodes?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>Same Code</span></th>
+            <th scope="col" ><span>Cog Broadcast Rights</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let sameCode of sameCodes ;trackBy: trackId">
+                <td><a [routerLink]="['/same-code', sameCode.id, 'view' ]">{{sameCode.id}}</a></td>
+                <td>{{sameCode.sameCode}}</td>
+                <td>
+                    <div *ngIf="sameCode.cogBroadcastRights">
+                        <a [routerLink]="['/cog-broadcast-rights', sameCode.cogBroadcastRights?.id, 'view' ]" >{{sameCode.cogBroadcastRights?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/same-code', sameCode.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/same-code', sameCode.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(sameCode)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

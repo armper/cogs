@@ -1,0 +1,28 @@
+{
+    "name": "SameCode",
+    "fields": [
+        {
+            "fieldName": "sameCode",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "cogBroadcastRights",
+            "otherEntityRelationshipName": "sameCode",
+            "relationshipName": "cogBroadcastRights",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20191203013432",
+    "entityTableName": "same_code",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
