@@ -13,6 +13,14 @@
             "otherEntityRelationshipName": "sameCode",
             "relationshipName": "cogBroadcastRights",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "cogBroadcastRights",
+            "otherEntityRelationshipName": "sameCode",
+            "relationshipName": "cogBroadcastRights",
+            "otherEntityField": "id",
+            "ownerSide": false
         }
     ],
     "changelogDate": "20191203013432",

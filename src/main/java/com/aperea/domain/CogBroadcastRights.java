@@ -26,6 +26,12 @@ public class CogBroadcastRights implements Serializable {
     @OneToMany(mappedBy = "cogBroadcastRights")
     private Set<SameCode> sameCodes = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "cog_broadcast_rights_same_code",
+               joinColumns = @JoinColumn(name = "cog_broadcast_rights_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "same_code_id", referencedColumnName = "id"))
+    private Set<SameCode> sameCodes = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -66,6 +72,31 @@ public class CogBroadcastRights implements Serializable {
     public CogBroadcastRights removeSameCode(SameCode sameCode) {
         this.sameCodes.remove(sameCode);
         sameCode.setCogBroadcastRights(null);
+        return this;
+    }
+
+    public void setSameCodes(Set<SameCode> sameCodes) {
+        this.sameCodes = sameCodes;
+    }
+
+    public Set<SameCode> getSameCodes() {
+        return sameCodes;
+    }
+
+    public CogBroadcastRights sameCodes(Set<SameCode> sameCodes) {
+        this.sameCodes = sameCodes;
+        return this;
+    }
+
+    public CogBroadcastRights addSameCode(SameCode sameCode) {
+        this.sameCodes.add(sameCode);
+        sameCode.getCogBroadcastRights().add(this);
+        return this;
+    }
+
+    public CogBroadcastRights removeSameCode(SameCode sameCode) {
+        this.sameCodes.remove(sameCode);
+        sameCode.getCogBroadcastRights().remove(this);
         return this;
     }
 
