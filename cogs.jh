@@ -11,3 +11,6 @@ entity SameCode {
 relationship OneToMany {
 	CogBroadcastRights{sameCode} to SameCode
 }
+relationship ManyToMany {
+	CogBroadcastRights{sameCode(sameCode)} to SameCode{cogBroadcastRights}
+}
