@@ -1,9 +1,12 @@
 package com.aperea.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A SameCode.
@@ -25,6 +28,10 @@ public class SameCode implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("sameCodes")
     private CogBroadcastRights cogBroadcastRights;
+
+    @ManyToMany(mappedBy = "sameCodes")
+    @JsonIgnore
+    private Set<CogBroadcastRights> cogBroadcastRights = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -58,6 +65,31 @@ public class SameCode implements Serializable {
     }
 
     public void setCogBroadcastRights(CogBroadcastRights cogBroadcastRights) {
+        this.cogBroadcastRights = cogBroadcastRights;
+    }
+
+    public Set<CogBroadcastRights> getCogBroadcastRights() {
+        return cogBroadcastRights;
+    }
+
+    public SameCode cogBroadcastRights(Set<CogBroadcastRights> cogBroadcastRights) {
+        this.cogBroadcastRights = cogBroadcastRights;
+        return this;
+    }
+
+    public SameCode addCogBroadcastRights(CogBroadcastRights cogBroadcastRights) {
+        this.cogBroadcastRights.add(cogBroadcastRights);
+        cogBroadcastRights.getSameCodes().add(this);
+        return this;
+    }
+
+    public SameCode removeCogBroadcastRights(CogBroadcastRights cogBroadcastRights) {
+        this.cogBroadcastRights.remove(cogBroadcastRights);
+        cogBroadcastRights.getSameCodes().remove(this);
+        return this;
+    }
+
+    public void setCogBroadcastRights(Set<CogBroadcastRights> cogBroadcastRights) {
         this.cogBroadcastRights = cogBroadcastRights;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

@@ -83,13 +83,13 @@ public class CogBroadcastRightsResource {
     /**
      * {@code GET  /cog-broadcast-rights} : get all the cogBroadcastRights.
      *
-
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cogBroadcastRights in body.
      */
     @GetMapping("/cog-broadcast-rights")
-    public List<CogBroadcastRights> getAllCogBroadcastRights() {
+    public List<CogBroadcastRights> getAllCogBroadcastRights(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all CogBroadcastRights");
-        return cogBroadcastRightsRepository.findAll();
+        return cogBroadcastRightsRepository.findAllWithEagerRelationships();
     }
 
     /**
@@ -101,7 +101,7 @@ public class CogBroadcastRightsResource {
     @GetMapping("/cog-broadcast-rights/{id}")
     public ResponseEntity<CogBroadcastRights> getCogBroadcastRights(@PathVariable Long id) {
         log.debug("REST request to get CogBroadcastRights : {}", id);
-        Optional<CogBroadcastRights> cogBroadcastRights = cogBroadcastRightsRepository.findById(id);
+        Optional<CogBroadcastRights> cogBroadcastRights = cogBroadcastRightsRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(cogBroadcastRights);
     }
 

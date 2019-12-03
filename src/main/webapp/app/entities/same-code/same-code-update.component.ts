@@ -97,4 +97,15 @@ export class SameCodeUpdateComponent implements OnInit {
   trackCogBroadcastRightsById(index: number, item: ICogBroadcastRights) {
     return item.id;
   }
+
+  getSelected(selectedVals: any[], option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
+  }
 }

@@ -5,8 +5,11 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { JhiAlertService } from 'ng-jhipster';
 import { ICogBroadcastRights, CogBroadcastRights } from 'app/shared/model/cog-broadcast-rights.model';
 import { CogBroadcastRightsService } from './cog-broadcast-rights.service';
+import { ISameCode } from 'app/shared/model/same-code.model';
+import { SameCodeService } from 'app/entities/same-code/same-code.service';
 
 @Component({
   selector: 'jhi-cog-broadcast-rights-update',
@@ -15,13 +18,18 @@ import { CogBroadcastRightsService } from './cog-broadcast-rights.service';
 export class CogBroadcastRightsUpdateComponent implements OnInit {
   isSaving: boolean;
 
+  samecodes: ISameCode[];
+
   editForm = this.fb.group({
     id: [],
-    cogId: []
+    cogId: [],
+    sameCodes: []
   });
 
   constructor(
+    protected jhiAlertService: JhiAlertService,
     protected cogBroadcastRightsService: CogBroadcastRightsService,
+    protected sameCodeService: SameCodeService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -31,12 +39,16 @@ export class CogBroadcastRightsUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ cogBroadcastRights }) => {
       this.updateForm(cogBroadcastRights);
     });
+    this.sameCodeService
+      .query()
+      .subscribe((res: HttpResponse<ISameCode[]>) => (this.samecodes = res.body), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(cogBroadcastRights: ICogBroadcastRights) {
     this.editForm.patchValue({
       id: cogBroadcastRights.id,
-      cogId: cogBroadcastRights.cogId
+      cogId: cogBroadcastRights.cogId,
+      sameCodes: cogBroadcastRights.sameCodes
     });
   }
 
@@ -58,7 +70,8 @@ export class CogBroadcastRightsUpdateComponent implements OnInit {
     return {
       ...new CogBroadcastRights(),
       id: this.editForm.get(['id']).value,
-      cogId: this.editForm.get(['cogId']).value
+      cogId: this.editForm.get(['cogId']).value,
+      sameCodes: this.editForm.get(['sameCodes']).value
     };
   }
 
@@ -73,5 +86,23 @@ export class CogBroadcastRightsUpdateComponent implements OnInit {
 
   protected onSaveError() {
     this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackSameCodeById(index: number, item: ISameCode) {
+    return item.id;
+  }
+
+  getSelected(selectedVals: any[], option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

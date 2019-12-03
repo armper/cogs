@@ -12,6 +12,14 @@
             "otherEntityName": "sameCode",
             "otherEntityRelationshipName": "cogBroadcastRights",
             "relationshipName": "sameCode"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "sameCode",
+            "otherEntityRelationshipName": "cogBroadcastRights",
+            "relationshipName": "sameCode",
+            "otherEntityField": "sameCode",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20191203013431",

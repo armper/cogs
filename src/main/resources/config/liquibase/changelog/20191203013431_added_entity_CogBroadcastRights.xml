@@ -24,6 +24,17 @@
 
     <changeSet id="20191203013431-1-relations" author="jhipster">
 
+        <createTable tableName="cog_broadcast_rights_same_code">
+            <column name="same_code_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cog_broadcast_rights_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="cog_broadcast_rights_id, same_code_id" tableName="cog_broadcast_rights_same_code"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 

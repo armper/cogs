@@ -20,6 +20,7 @@
             <tr>
             <th scope="col" ><span>ID</span></th>
             <th scope="col" ><span>Cog Id</span></th>
+            <th scope="col" ><span>Same Code</span></th>
             <th scope="col"></th>
             </tr>
             </thead>
@@ -27,6 +28,11 @@
             <tr *ngFor="let cogBroadcastRights of cogBroadcastRights ;trackBy: trackId">
                 <td><a [routerLink]="['/cog-broadcast-rights', cogBroadcastRights.id, 'view' ]">{{cogBroadcastRights.id}}</a></td>
                 <td>{{cogBroadcastRights.cogId}}</td>
+                <td>
+                    <span *ngFor="let sameCode of cogBroadcastRights.sameCodes; let last = last">
+                            <a class="form-control-static" [routerLink]="['/same-code', sameCode?.id, 'view' ]">{{sameCode.sameCode}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
                 <td class="text-right">
                     <div class="btn-group">
                         <button type="submit"
