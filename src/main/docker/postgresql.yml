@@ -1,0 +1,11 @@
+version: '2'
+services:
+  cogs-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/cogs/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=cogs
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
