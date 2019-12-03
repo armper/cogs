@@ -1,0 +1,13 @@
+
+entity CogBroadcastRights {
+
+	cogId String
+}
+
+entity SameCode {
+	sameCode String
+}
+
+relationship OneToMany {
+	CogBroadcastRights{sameCode} to SameCode
+}
